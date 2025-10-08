@@ -15,7 +15,6 @@ public class VentaDAO {
         conn = ConectorDB.getInstance().getConnection();
     }
 
-    // 🔹 Crear venta
     public boolean registrarVenta(Venta venta) {
         String sql = "INSERT INTO venta (rut_cliente, id_equipo, fecha_hora, descuento, total) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -32,7 +31,6 @@ public class VentaDAO {
         }
     }
 
-    // 🔹 Listar todas las ventas
     public List<Venta> listarVentas() {
         List<Venta> lista = new ArrayList<>();
         String sql = "SELECT * FROM venta ORDER BY fecha_hora DESC";
@@ -54,7 +52,6 @@ public class VentaDAO {
         return lista;
     }
 
-    // 🔹 Reporte: total de ventas y monto total
     public void mostrarResumenVentas() {
         String sql = "SELECT COUNT(*) AS cantidad, SUM(total) AS monto FROM venta";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
@@ -67,7 +64,6 @@ public class VentaDAO {
         }
     }
 
-    // 🔹 Reporte: equipos vendidos con datos de cliente
     public void listarEquiposVendidos() {
         String sql = """
             SELECT e.modelo, e.tipo, c.nombre, c.telefono, c.correo, e.precio
