@@ -14,7 +14,6 @@ public class ClienteDAO {
         conn = ConectorDB.getInstance().getConnection();
     }
 
-    // 🔹 Crear (INSERT)
     public boolean agregarCliente(Cliente cliente) {
         String sql = "INSERT INTO cliente (rut, nombre, direccion, comuna, correo, telefono) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -27,7 +26,7 @@ public class ClienteDAO {
             stmt.executeUpdate();
             return true;
         } catch (SQLException e) {
-            System.out.println("Error al agregar cliente: " + e.getMessage());
+            System.out.println("Error al agregar cliente");
             return false;
         }
     }
@@ -49,7 +48,7 @@ public class ClienteDAO {
                 lista.add(c);
             }
         } catch (SQLException e) {
-            System.out.println("Error al listar clientes: " + e.getMessage());
+            System.out.println("Error al listar clientes");
         }
         return lista;
     }
